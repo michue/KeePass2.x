@@ -200,6 +200,14 @@ namespace KeePass.App.Configuration
 			set { m_bShowDbOpenUnkVerDlg = value; }
 		}
 
+		private bool m_bShowNameCustomIconDlg = true;
+		[DefaultValue(true)]
+		public bool ShowNameCustomIconDialog
+		{
+			get { return m_bShowNameCustomIconDlg; }
+			set { m_bShowNameCustomIconDlg = value; }
+		}
+
 		// private bool m_bUseCustomTsRenderer = true;
 		// [DefaultValue(true)]
 		// public bool UseCustomToolStripRenderer

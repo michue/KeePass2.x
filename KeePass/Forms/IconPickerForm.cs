@@ -34,6 +34,7 @@ using KeePass.UI;
 using KeePass.Util.MultipleValues;
 
 using KeePassLib;
+using KeePassLib.Serialization;
 using KeePassLib.Utility;
 
 namespace KeePass.Forms
@@ -336,11 +337,7 @@ namespace KeePass.Forms
 				sbFilter.ToString(), 1, null, true, AppDefs.FileDialogContext.Import);
 			if(ofd.ShowDialog() != DialogResult.OK) return;
 
-			// Predicate<PwCustomIcon> fRequiresKdbx4p1 = delegate(PwCustomIcon ci)
-			// {
-			//	return ((ci.Name.Length != 0) || ci.LastModificationTime.HasValue);
-			// };
-			// bool bUseFileName = m_pd.CustomIcons.Exists(fRequiresKdbx4p1);
+			bool bUseFileName = KdbxFile.ContainsCustomIconsWithNames(m_pd);
 
 			PwUuid puSelect = PwUuid.Zero;
 			foreach(string strFile in ofd.FileNames)
@@ -373,12 +370,49 @@ namespace KeePass.Forms
 					PwUuid pu = new PwUuid(true);
 					PwCustomIcon ci = new PwCustomIcon(pu, msPng.ToArray());
 
-					// if(bUseFileName)
-					// {
-					//	string strName = UrlUtil.StripExtension(
-					//		UrlUtil.GetFileName(strFile));
-					//	if(!string.IsNullOrEmpty(strName)) ci.Name = strName;
-					// }
+					if(bUseFileName)
+					{
+						string strName = UrlUtil.StripExtension(
+							UrlUtil.GetFileName(strFile));
+
+						if(!string.IsNullOrEmpty(strName))
+						{
+							bool bNameCustomIcon = true;
+							string strContent = StrUtil.CompactString3Dots(strName, 39);
+
+							if(Program.Config.UI.ShowNameCustomIconDialog)
+							{
+								VistaTaskDialog dlg = new VistaTaskDialog();
+								dlg.CommandLinks = false;
+								dlg.Content = strContent;
+								dlg.MainInstruction = KPRes.NameCustomIconConfirm;
+								dlg.SetIcon(VtdCustomIcon.Question);
+								dlg.VerificationText = KPRes.DialogNoShowAgain;
+								dlg.WindowTitle = PwDefs.ShortProductName;
+								dlg.AddButton((int)DialogResult.OK, KPRes.YesCmd, null);
+								dlg.AddButton((int)DialogResult.Cancel, KPRes.NoCmd, null);
+
+								if(dlg.ShowDialog())
+								{
+									if(dlg.Result == (int)DialogResult.Cancel) bNameCustomIcon = false;
+									else if(dlg.ResultVerificationChecked)
+										Program.Config.UI.ShowNameCustomIconDialog = false;
+								}
+								else
+								{
+									string strText = KPRes.NameCustomIconConfirm;
+									strText += MessageService.NewParagraph + strContent;
+
+									if(!MessageService.AskYesNo(strText, KPRes.NameCustomIcon))
+										bNameCustomIcon = false;
+								}
+							}
+							if(bNameCustomIcon)
+							{
+								ci.Name = strName;
+							}
+						}
+					}
 
 					m_pd.CustomIcons.Add(ci);
 					m_pd.UINeedsIconUpdate = true;

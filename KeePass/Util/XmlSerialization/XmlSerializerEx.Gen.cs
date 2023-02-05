@@ -526,6 +526,9 @@ namespace KeePass.Util.XmlSerialization
 					case "ShowDbOpenUnkVerDialog":
 						o.ShowDbOpenUnkVerDialog = ReadBoolean(xr);
 						break;
+					case "ShowNameCustomIconDialog":
+						o.ShowNameCustomIconDialog = ReadBoolean(xr);
+						break;
 					case "ToolStripRenderer":
 						o.ToolStripRenderer = ReadString(xr);
 						break;

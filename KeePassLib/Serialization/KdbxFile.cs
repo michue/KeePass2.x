@@ -343,6 +343,24 @@ namespace KeePassLib.Serialization
 			}
 		}
 
+		/// <summary>
+		/// Check if the given database contains custom icons with names
+		/// or last modification times, requiring KDBX Version 4.1.
+		/// </summary>
+		public static bool ContainsCustomIconsWithNames(PwDatabase pwDataStore)
+		{
+			Debug.Assert(pwDataStore != null);
+			if(pwDataStore == null) throw new ArgumentNullException("pwDataStore");
+
+			foreach(PwCustomIcon ci in pwDataStore.CustomIcons)
+			{
+				if((ci.Name.Length != 0) || ci.LastModificationTime.HasValue)
+					return true;
+			}
+
+			return false;
+		}
+
 		private uint GetMinKdbxVersion()
 		{
 			if(m_uForceVersion != 0) return m_uForceVersion;
@@ -380,11 +398,7 @@ namespace KeePassLib.Serialization
 
 			if(uMin >= FileVersion32_4_1) return uMin; // All below is <= 4.1
 
-			foreach(PwCustomIcon ci in m_pwDatabase.CustomIcons)
-			{
-				if((ci.Name.Length != 0) || ci.LastModificationTime.HasValue)
-					return FileVersion32_4_1;
-			}
+			if(KdbxFile.ContainsCustomIconsWithNames(m_pwDatabase)) return FileVersion32_4_1;
 
 			foreach(KeyValuePair<string, string> kvp in m_pwDatabase.CustomData)
 			{

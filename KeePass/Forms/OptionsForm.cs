@@ -551,6 +551,8 @@ namespace KeePass.Forms
 				lvg, KPRes.EmergencySheetAsk);
 			m_cdxGuiOptions.CreateItem(Program.Config.UI, "ShowDbOpenUnkVerDialog",
 				lvg, KPRes.DatabaseOpenUnknownVersionAsk);
+			m_cdxGuiOptions.CreateItem(Program.Config.UI, "ShowNameCustomIconDialog",
+				lvg, KPRes.NameCustomIconShowConfirm);
 
 			lvg = new ListViewGroup(KPRes.Advanced);
 			m_lvGuiOptions.Groups.Add(lvg);

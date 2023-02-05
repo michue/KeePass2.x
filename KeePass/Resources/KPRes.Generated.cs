@@ -610,6 +610,9 @@ namespace KeePass.Resources
 			m_strMoveUp = TryGetEx(dictNew, "MoveUp", m_strMoveUp);
 			m_strMultipleValues = TryGetEx(dictNew, "MultipleValues", m_strMultipleValues);
 			m_strName = TryGetEx(dictNew, "Name", m_strName);
+			m_strNameCustomIcon = TryGetEx(dictNew, "NameCustomIcon", m_strNameCustomIcon);
+			m_strNameCustomIconConfirm = TryGetEx(dictNew, "NameCustomIconConfirm", m_strNameCustomIconConfirm);
+			m_strNameCustomIconShowConfirm = TryGetEx(dictNew, "NameCustomIconShowConfirm", m_strNameCustomIconShowConfirm);
 			m_strNativeLibUse = TryGetEx(dictNew, "NativeLibUse", m_strNativeLibUse);
 			m_strNavigation = TryGetEx(dictNew, "Navigation", m_strNavigation);
 			m_strNetwork = TryGetEx(dictNew, "Network", m_strNetwork);
@@ -1584,6 +1587,9 @@ namespace KeePass.Resources
 			"MoveUp",
 			"MultipleValues",
 			"Name",
+			"NameCustomIcon",
+			"NameCustomIconConfirm",
+			"NameCustomIconShowConfirm",
 			"NativeLibUse",
 			"Navigation",
 			"Network",
@@ -8400,6 +8406,39 @@ namespace KeePass.Resources
 		public static string Name
 		{
 			get { return m_strName; }
+		}
+
+		private static string m_strNameCustomIcon =
+			@"Name Custom Icon";
+		/// <summary>
+		/// Look up a localized string similar to
+		/// 'Name Custom Icon'.
+		/// </summary>
+		public static string NameCustomIcon
+		{
+			get { return m_strNameCustomIcon; }
+		}
+
+		private static string m_strNameCustomIconConfirm =
+			@"Do you want to name the custom icon as shown below?";
+		/// <summary>
+		/// Look up a localized string similar to
+		/// 'Do you want to name the custom icon as shown below?'.
+		/// </summary>
+		public static string NameCustomIconConfirm
+		{
+			get { return m_strNameCustomIconConfirm; }
+		}
+
+		private static string m_strNameCustomIconShowConfirm =
+			@"Show confirmation dialog when naming custom icons on creation";
+		/// <summary>
+		/// Look up a localized string similar to
+		/// 'Show confirmation dialog when naming custom icons on creation'.
+		/// </summary>
+		public static string NameCustomIconShowConfirm
+		{
+			get { return m_strNameCustomIconShowConfirm; }
 		}
 
 		private static string m_strNativeLibUse =
