@@ -39,6 +39,7 @@
 			this.m_lnkWildcardRegexHint = new System.Windows.Forms.LinkLabel();
 			this.m_rbSeqDefault = new System.Windows.Forms.RadioButton();
 			this.m_rbSeqCustom = new System.Windows.Forms.RadioButton();
+			this.m_rbWindowExcluded = new System.Windows.Forms.RadioButton();
 			this.m_cmbWindow = new KeePass.UI.ImageComboBoxEx();
 			this.m_rtbPlaceholders = new KeePass.UI.CustomRichTextBoxEx();
 			this.m_rbKeySeq = new KeePass.UI.CustomRichTextBoxEx();
@@ -57,10 +58,10 @@
 			// m_btnOK
 			// 
 			this.m_btnOK.DialogResult = System.Windows.Forms.DialogResult.OK;
-			this.m_btnOK.Location = new System.Drawing.Point(343, 425);
+			this.m_btnOK.Location = new System.Drawing.Point(343, 446);
 			this.m_btnOK.Name = "m_btnOK";
 			this.m_btnOK.Size = new System.Drawing.Size(75, 23);
-			this.m_btnOK.TabIndex = 11;
+			this.m_btnOK.TabIndex = 12;
 			this.m_btnOK.Text = "OK";
 			this.m_btnOK.UseVisualStyleBackColor = true;
 			this.m_btnOK.Click += new System.EventHandler(this.OnBtnOK);
@@ -68,20 +69,20 @@
 			// m_btnCancel
 			// 
 			this.m_btnCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-			this.m_btnCancel.Location = new System.Drawing.Point(424, 425);
+			this.m_btnCancel.Location = new System.Drawing.Point(424, 446);
 			this.m_btnCancel.Name = "m_btnCancel";
 			this.m_btnCancel.Size = new System.Drawing.Size(75, 23);
-			this.m_btnCancel.TabIndex = 12;
+			this.m_btnCancel.TabIndex = 13;
 			this.m_btnCancel.Text = "Cancel";
 			this.m_btnCancel.UseVisualStyleBackColor = true;
 			this.m_btnCancel.Click += new System.EventHandler(this.OnBtnCancel);
 			// 
 			// m_btnHelp
 			// 
-			this.m_btnHelp.Location = new System.Drawing.Point(12, 425);
+			this.m_btnHelp.Location = new System.Drawing.Point(12, 446);
 			this.m_btnHelp.Name = "m_btnHelp";
 			this.m_btnHelp.Size = new System.Drawing.Size(75, 23);
-			this.m_btnHelp.TabIndex = 10;
+			this.m_btnHelp.TabIndex = 11;
 			this.m_btnHelp.Text = "&Help";
 			this.m_btnHelp.UseVisualStyleBackColor = true;
 			this.m_btnHelp.Click += new System.EventHandler(this.OnBtnHelp);
@@ -98,19 +99,19 @@
 			// m_lblKeySeqInsertInfo
 			// 
 			this.m_lblKeySeqInsertInfo.AutoSize = true;
-			this.m_lblKeySeqInsertInfo.Location = new System.Drawing.Point(29, 214);
+			this.m_lblKeySeqInsertInfo.Location = new System.Drawing.Point(29, 236);
 			this.m_lblKeySeqInsertInfo.Name = "m_lblKeySeqInsertInfo";
 			this.m_lblKeySeqInsertInfo.Size = new System.Drawing.Size(94, 13);
-			this.m_lblKeySeqInsertInfo.TabIndex = 7;
+			this.m_lblKeySeqInsertInfo.TabIndex = 8;
 			this.m_lblKeySeqInsertInfo.Text = "&Insert placeholder:";
 			// 
 			// m_lblSeparator
 			// 
 			this.m_lblSeparator.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-			this.m_lblSeparator.Location = new System.Drawing.Point(0, 416);
+			this.m_lblSeparator.Location = new System.Drawing.Point(0, 437);
 			this.m_lblSeparator.Name = "m_lblSeparator";
 			this.m_lblSeparator.Size = new System.Drawing.Size(511, 2);
-			this.m_lblSeparator.TabIndex = 9;
+			this.m_lblSeparator.TabIndex = 10;
 			// 
 			// m_lblOpenHint
 			// 
@@ -135,10 +136,10 @@
 			// m_rbSeqDefault
 			// 
 			this.m_rbSeqDefault.AutoSize = true;
-			this.m_rbSeqDefault.Location = new System.Drawing.Point(12, 142);
+			this.m_rbSeqDefault.Location = new System.Drawing.Point(12, 164);
 			this.m_rbSeqDefault.Name = "m_rbSeqDefault";
 			this.m_rbSeqDefault.Size = new System.Drawing.Size(234, 17);
-			this.m_rbSeqDefault.TabIndex = 4;
+			this.m_rbSeqDefault.TabIndex = 5;
 			this.m_rbSeqDefault.TabStop = true;
 			this.m_rbSeqDefault.Text = "Use &default keystroke sequence of the entry";
 			this.m_rbSeqDefault.UseVisualStyleBackColor = true;
@@ -147,14 +148,26 @@
 			// m_rbSeqCustom
 			// 
 			this.m_rbSeqCustom.AutoSize = true;
-			this.m_rbSeqCustom.Location = new System.Drawing.Point(12, 164);
+			this.m_rbSeqCustom.Location = new System.Drawing.Point(12, 186);
 			this.m_rbSeqCustom.Name = "m_rbSeqCustom";
 			this.m_rbSeqCustom.Size = new System.Drawing.Size(183, 17);
-			this.m_rbSeqCustom.TabIndex = 5;
+			this.m_rbSeqCustom.TabIndex = 6;
 			this.m_rbSeqCustom.TabStop = true;
 			this.m_rbSeqCustom.Text = "Use &custom keystroke sequence:";
 			this.m_rbSeqCustom.UseVisualStyleBackColor = true;
 			this.m_rbSeqCustom.CheckedChanged += new System.EventHandler(this.OnSeqCustomCheckedChanged);
+			// 
+			// m_rbWindowExcluded
+			// 
+			this.m_rbWindowExcluded.AutoSize = true;
+			this.m_rbWindowExcluded.Location = new System.Drawing.Point(12, 142);
+			this.m_rbWindowExcluded.Name = "m_rbWindowExcluded";
+			this.m_rbWindowExcluded.Size = new System.Drawing.Size(164, 17);
+			this.m_rbWindowExcluded.TabIndex = 4;
+			this.m_rbWindowExcluded.TabStop = true;
+			this.m_rbWindowExcluded.Text = "&Exclude entry from Auto-Type";
+			this.m_rbWindowExcluded.UseVisualStyleBackColor = true;
+			this.m_rbWindowExcluded.CheckedChanged += new System.EventHandler(this.OnWindowExcludeCheckedChanged);
 			// 
 			// m_cmbWindow
 			// 
@@ -170,12 +183,12 @@
 			// 
 			this.m_rtbPlaceholders.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
 			this.m_rtbPlaceholders.DetectUrls = false;
-			this.m_rtbPlaceholders.Location = new System.Drawing.Point(32, 230);
+			this.m_rtbPlaceholders.Location = new System.Drawing.Point(32, 252);
 			this.m_rtbPlaceholders.Name = "m_rtbPlaceholders";
 			this.m_rtbPlaceholders.ReadOnly = true;
 			this.m_rtbPlaceholders.ScrollBars = System.Windows.Forms.RichTextBoxScrollBars.ForcedVertical;
 			this.m_rtbPlaceholders.Size = new System.Drawing.Size(467, 171);
-			this.m_rtbPlaceholders.TabIndex = 8;
+			this.m_rtbPlaceholders.TabIndex = 9;
 			this.m_rtbPlaceholders.Text = "";
 			this.m_rtbPlaceholders.LinkClicked += new System.Windows.Forms.LinkClickedEventHandler(this.OnPlaceholdersLinkClicked);
 			// 
@@ -184,11 +197,11 @@
 			this.m_rbKeySeq.DetectUrls = false;
 			this.m_rbKeySeq.Font = new System.Drawing.Font("Courier New", 8.25F);
 			this.m_rbKeySeq.HideSelection = false;
-			this.m_rbKeySeq.Location = new System.Drawing.Point(32, 187);
+			this.m_rbKeySeq.Location = new System.Drawing.Point(32, 209);
 			this.m_rbKeySeq.Multiline = false;
 			this.m_rbKeySeq.Name = "m_rbKeySeq";
 			this.m_rbKeySeq.Size = new System.Drawing.Size(467, 21);
-			this.m_rbKeySeq.TabIndex = 6;
+			this.m_rbKeySeq.TabIndex = 7;
 			this.m_rbKeySeq.Text = "";
 			this.m_rbKeySeq.TextChanged += new System.EventHandler(this.OnTextChangedKeySeq);
 			// 
@@ -198,7 +211,8 @@
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
 			this.CancelButton = this.m_btnCancel;
-			this.ClientSize = new System.Drawing.Size(511, 460);
+			this.ClientSize = new System.Drawing.Size(511, 482);
+			this.Controls.Add(this.m_rbWindowExcluded);
 			this.Controls.Add(this.m_rbSeqCustom);
 			this.Controls.Add(this.m_rbSeqDefault);
 			this.Controls.Add(this.m_lnkWildcardRegexHint);
@@ -221,9 +235,9 @@
 			this.SizeGripStyle = System.Windows.Forms.SizeGripStyle.Hide;
 			this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
 			this.Text = "Edit Auto-Type Item";
+			this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.OnFormClosed);
 			this.Load += new System.EventHandler(this.OnFormLoad);
 			this.Shown += new System.EventHandler(this.OnFormShown);
-			this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.OnFormClosed);
 			((System.ComponentModel.ISupportInitialize)(this.m_bannerImage)).EndInit();
 			this.ResumeLayout(false);
 			this.PerformLayout();
@@ -246,5 +260,6 @@
 		private System.Windows.Forms.LinkLabel m_lnkWildcardRegexHint;
 		private System.Windows.Forms.RadioButton m_rbSeqDefault;
 		private System.Windows.Forms.RadioButton m_rbSeqCustom;
+		private System.Windows.Forms.RadioButton m_rbWindowExcluded;
 	}
 }

@@ -46,6 +46,13 @@ namespace KeePassLib.Collections
 			}
 		}
 
+		private bool m_bWindowExcluded = false;
+		public bool WindowExcluded
+		{
+			get { return m_bWindowExcluded; }
+			set { m_bWindowExcluded = value; }
+		}
+
 		private string m_strSequence = string.Empty;
 		public string Sequence
 		{
@@ -65,12 +72,23 @@ namespace KeePassLib.Collections
 			if(strSeq == null) throw new ArgumentNullException("strSeq");
 
 			m_strWindow = strWindow;
+			m_bWindowExcluded = false;
+			m_strSequence = strSeq;
+		}
+
+		public AutoTypeAssociation(string strWindow, bool bWindowExcluded, string strSeq)
+		{
+			if(strWindow == null) throw new ArgumentNullException("strWindow");
+			if(strSeq == null) throw new ArgumentNullException("strSeq");
+
+			m_strWindow = strWindow;
+			m_bWindowExcluded = bWindowExcluded;
 			m_strSequence = strSeq;
 		}
 
 		public override int GetHashCode()
 		{
-			return (m_strWindow.GetHashCode() + m_strSequence.GetHashCode());
+			return (m_strWindow.GetHashCode() + (m_bWindowExcluded ? 0x208F391C : 0) + m_strSequence.GetHashCode());
 		}
 
 		public override bool Equals(object obj)
@@ -84,6 +102,7 @@ namespace KeePassLib.Collections
 			if(object.ReferenceEquals(other, null)) { Debug.Assert(false); return false; }
 
 			if(m_strWindow != other.m_strWindow) return false;
+			if(m_bWindowExcluded != other.m_bWindowExcluded) return false;
 			if(m_strSequence != other.m_strSequence) return false;
 
 			return true;

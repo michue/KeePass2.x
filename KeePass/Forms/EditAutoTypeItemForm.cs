@@ -132,25 +132,31 @@ namespace KeePass.Forms
 
 			InitPlaceholdersBox(bRtl);
 
+			bool bWindowExcluded = false;
 			string strInitSeq = m_atConfig.DefaultSequence;
 			if(m_iAssocIndex >= 0)
 			{
 				AutoTypeAssociation asInit = m_atConfig.GetAt(m_iAssocIndex);
 				m_cmbWindow.Text = asInit.WindowName;
 
-				if(!m_bEditSequenceOnly) strInitSeq = asInit.Sequence;
+				if(!m_bEditSequenceOnly)
+				{
+					bWindowExcluded = asInit.WindowExcluded;
+					strInitSeq = asInit.Sequence;
+				}
 			}
 			else if(m_bEditSequenceOnly)
 				m_cmbWindow.Text = "(" + KPRes.Default + ")";
 			else strInitSeq = string.Empty;
 
-			bool bSetDefault = false;
+			bool bSetDefault = true;
 			m_bBlockUpdates = true;
-			if(strInitSeq.Length > 0) m_rbSeqCustom.Checked = true;
+			if(bWindowExcluded) m_rbWindowExcluded.Checked = true;
+			else if(strInitSeq.Length == 0) m_rbSeqDefault.Checked = true;
 			else
 			{
-				m_rbSeqDefault.Checked = true;
-				bSetDefault = true;
+				m_rbSeqCustom.Checked = true;
+				bSetDefault = false;
 			}
 			m_bBlockUpdates = false;
 
@@ -356,6 +362,7 @@ namespace KeePass.Forms
 				}
 
 				atAssoc.WindowName = m_cmbWindow.Text;
+				atAssoc.WindowExcluded = m_rbWindowExcluded.Checked;
 				atAssoc.Sequence = strNewSeq;
 			}
 			else m_atConfig.DefaultSequence = strNewSeq;
@@ -417,6 +424,8 @@ namespace KeePass.Forms
 
 			// Workaround for disabled link render bug (gray too dark)
 			m_lnkWildcardRegexHint.Visible = !m_bEditSequenceOnly;
+
+			m_rbWindowExcluded.Enabled = !m_bEditSequenceOnly;
 
 			bool bCustom = m_rbSeqCustom.Checked;
 			m_rbKeySeq.Enabled = bCustom;
@@ -530,6 +539,11 @@ namespace KeePass.Forms
 		}
 
 		private void OnSeqCustomCheckedChanged(object sender, EventArgs e)
+		{
+			EnableControlsEx();
+		}
+
+		private void OnWindowExcludeCheckedChanged(object sender, EventArgs e)
 		{
 			EnableControlsEx();
 		}
