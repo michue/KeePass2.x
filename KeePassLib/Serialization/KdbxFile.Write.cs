@@ -593,8 +593,7 @@ namespace KeePassLib.Serialization
 				WriteObject(ElemAutoTypeDefaultSeq, cfgAutoType.DefaultSequence, true);
 
 			foreach(AutoTypeAssociation a in cfgAutoType.Associations)
-				WriteObject(ElemAutoTypeItem, ElemWindow, ElemKeystrokeSequence,
-					new KeyValuePair<string, string>(a.WindowName, a.Sequence), null);
+				WriteObject(ElemAutoTypeItem, a);
 
 			m_xmlWriter.WriteEndElement();
 		}
@@ -820,6 +819,24 @@ namespace KeePassLib.Serialization
 
 			if(odtLastMod.HasValue)
 				WriteObject(ElemLastModTime, odtLastMod.Value);
+
+			m_xmlWriter.WriteEndElement();
+		}
+
+		private void WriteObject(string name, AutoTypeAssociation value)
+		{
+			m_xmlWriter.WriteStartElement(name);
+
+			m_xmlWriter.WriteStartElement(ElemWindow);
+			m_xmlWriter.WriteString(StrUtil.SafeXmlString(value.WindowName));
+			m_xmlWriter.WriteEndElement();
+
+			if(m_uFileVersion >= FileVersion32_4_2)
+				WriteObject(ElemWindowExcluded, value.WindowExcluded);
+
+			m_xmlWriter.WriteStartElement(ElemKeystrokeSequence);
+			m_xmlWriter.WriteString(StrUtil.SafeXmlString(value.Sequence));
+			m_xmlWriter.WriteEndElement();
 
 			m_xmlWriter.WriteEndElement();
 		}

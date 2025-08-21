@@ -80,6 +80,7 @@ namespace KeePassLib.Serialization
 		private string m_ctxBinaryName = null;
 		private ProtectedBinary m_ctxBinaryValue = null;
 		private string m_ctxATName = null;
+		private bool m_ctxATExcluded = false;
 		private string m_ctxATSeq = null;
 		private bool m_bEntryInHistory = false;
 		private PwEntry m_ctxHistoryBase = null;
@@ -538,6 +539,8 @@ namespace KeePassLib.Serialization
 				case KdbContext.EntryAutoTypeItem:
 					if(xr.Name == ElemWindow)
 						m_ctxATName = ReadString(xr);
+					else if(xr.Name == ElemWindowExcluded)
+						m_ctxATExcluded = ReadBool(xr, false);
 					else if(xr.Name == ElemKeystrokeSequence)
 						m_ctxATSeq = ReadString(xr);
 					else ReadUnknown(xr);
@@ -719,10 +722,11 @@ namespace KeePassLib.Serialization
 				return KdbContext.Entry;
 			if((ctx == KdbContext.EntryAutoTypeItem) && (xr.Name == ElemAutoTypeItem))
 			{
-				AutoTypeAssociation atAssoc = new AutoTypeAssociation(m_ctxATName,
+				AutoTypeAssociation atAssoc = new AutoTypeAssociation(m_ctxATName, m_ctxATExcluded,
 					m_ctxATSeq);
 				m_ctxEntry.AutoType.Add(atAssoc);
 				m_ctxATName = null;
+				m_ctxATExcluded = false;
 				m_ctxATSeq = null;
 				return KdbContext.EntryAutoType;
 			}

@@ -83,10 +83,11 @@ namespace KeePassLib.Serialization
 		/// case, thus showing a confirmation/warning is recommended.
 		/// KeePass version - format version:
 		/// 2.00 - 1.0, 2.07 - 1.1, 2.08 - 1.2, 2.09 - 2.0, 2.11 - 2.4,
-		/// 2.15 - 3.0, 2.20 - 3.1, 2.35 - 4.0, 2.48 - 4.1.
+		/// 2.15 - 3.0, 2.20 - 3.1, 2.35 - 4.0, 2.48 - 4.1., 2.60 - 4.2
 		/// </summary>
-		internal const uint FileVersion32 = 0x00040001;
+		internal const uint FileVersion32 = 0x00040002;
 
+		private const uint FileVersion32_4_2 = 0x00040002; // 4.2
 		private const uint FileVersion32_4_1 = 0x00040001; // 4.1
 		private const uint FileVersion32_4 = 0x00040000; // 4.0
 		internal const uint FileVersion32_3_1 = 0x00030001; // 3.1
@@ -183,6 +184,7 @@ namespace KeePassLib.Serialization
 		private const string ElemAutoTypeDefaultSeq = "DefaultSequence";
 		private const string ElemAutoTypeItem = "Association";
 		private const string ElemWindow = "Window";
+		private const string ElemWindowExcluded = "WindowExcluded";
 		private const string ElemKeystrokeSequence = "KeystrokeSequence";
 
 		private const string ElemBinaries = "Binaries";
@@ -372,6 +374,10 @@ namespace KeePassLib.Serialization
 
 				if(!pe.QualityCheck)
 					uMin = Math.Max(uMin, FileVersion32_4_1);
+
+				foreach(AutoTypeAssociation a in pe.AutoType.Associations)
+					if(a.WindowExcluded)
+						uMin = Math.Max(uMin, FileVersion32_4_2);
 
 				return true;
 			};
