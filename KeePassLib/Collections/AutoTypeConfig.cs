@@ -66,16 +66,6 @@ namespace KeePassLib.Collections
 
 		public AutoTypeAssociation() { }
 
-		public AutoTypeAssociation(string strWindow, string strSeq)
-		{
-			if(strWindow == null) throw new ArgumentNullException("strWindow");
-			if(strSeq == null) throw new ArgumentNullException("strSeq");
-
-			m_strWindow = strWindow;
-			m_bWindowExcluded = false;
-			m_strSequence = strSeq;
-		}
-
 		public AutoTypeAssociation(string strWindow, bool bWindowExcluded, string strSeq)
 		{
 			if(strWindow == null) throw new ArgumentNullException("strWindow");

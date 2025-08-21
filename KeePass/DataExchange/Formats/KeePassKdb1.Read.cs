@@ -448,11 +448,11 @@ namespace KeePass.DataExchange.Formats
 						string strWindow = strLine.Substring(strWndPrefix.Length).Trim();
 						string strSeq = FindPrefixedLine(vLines, strSeqPrefix);
 						if((strSeq != null) && (strSeq.Length > strSeqPrefix.Length))
-							pe.AutoType.Add(new AutoTypeAssociation(strWindow,
+							pe.AutoType.Add(new AutoTypeAssociation(strWindow, false,
 								ConvertAutoTypeSequence(strSeq.Substring(
 								strSeqPrefix.Length), true)));
 						else // Window, but no sequence
-							pe.AutoType.Add(new AutoTypeAssociation(strWindow,
+							pe.AutoType.Add(new AutoTypeAssociation(strWindow, false,
 								string.Empty));
 
 						bProcessed = true;
