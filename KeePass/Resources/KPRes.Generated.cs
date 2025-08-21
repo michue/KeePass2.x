@@ -332,6 +332,7 @@ namespace KeePass.Resources
 			m_strErrorCode = TryGetEx(dictNew, "ErrorCode", m_strErrorCode);
 			m_strErrors = TryGetEx(dictNew, "Errors", m_strErrors);
 			m_strEvent = TryGetEx(dictNew, "Event", m_strEvent);
+			m_strExcluded = TryGetEx(dictNew, "Excluded", m_strExcluded);
 			m_strExecuteCmdLineUrl = TryGetEx(dictNew, "ExecuteCmdLineUrl", m_strExecuteCmdLineUrl);
 			m_strExit = TryGetEx(dictNew, "Exit", m_strExit);
 			m_strExitInsteadOfLockingAfterTime = TryGetEx(dictNew, "ExitInsteadOfLockingAfterTime", m_strExitInsteadOfLockingAfterTime);
@@ -1312,6 +1313,7 @@ namespace KeePass.Resources
 			"ErrorCode",
 			"Errors",
 			"Event",
+			"Excluded",
 			"ExecuteCmdLineUrl",
 			"Exit",
 			"ExitInsteadOfLockingAfterTime",
@@ -5354,6 +5356,17 @@ namespace KeePass.Resources
 		public static string Event
 		{
 			get { return m_strEvent; }
+		}
+
+		private static string m_strExcluded =
+			@"Excluded";
+		/// <summary>
+		/// Look up a localized string similar to
+		/// 'Excluded'.
+		/// </summary>
+		public static string Excluded
+		{
+			get { return m_strExcluded; }
 		}
 
 		private static string m_strExecuteCmdLineUrl =

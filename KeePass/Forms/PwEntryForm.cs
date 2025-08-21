@@ -599,11 +599,15 @@ namespace KeePass.Forms
 			m_lvAutoType.BeginUpdate();
 			m_lvAutoType.Items.Clear();
 
+			string strExcluded = "(" + KPRes.Excluded + ")";
 			string strDefault = "(" + KPRes.Default + ")";
 			foreach(AutoTypeAssociation a in m_atConfig.Associations)
 			{
+				string strSequence = (a.Sequence.Length > 0) ? a.Sequence : strDefault;
+				if(a.WindowExcluded) strSequence = strExcluded;
+
 				ListViewItem lvi = m_lvAutoType.Items.Add(a.WindowName, (int)PwIcon.List);
-				lvi.SubItems.Add((a.Sequence.Length > 0) ? a.Sequence : strDefault);
+				lvi.SubItems.Add(strSequence);
 
 				lvi.Tag = a;
 
@@ -1701,6 +1705,7 @@ namespace KeePass.Forms
 						ms.WriteByte(1);
 						MemUtil.Write(ms, MemUtil.Int32ToBytes(pbWnd.Length));
 						MemUtil.Write(ms, pbWnd);
+						ms.WriteByte((byte)(a.WindowExcluded ? 1 : 0));
 						MemUtil.Write(ms, MemUtil.Int32ToBytes(pbSeq.Length));
 						MemUtil.Write(ms, pbSeq);
 					}
@@ -1737,10 +1742,11 @@ namespace KeePass.Forms
 						{
 							int cbWnd = MemUtil.BytesToInt32(MemUtil.Read(ms, 4));
 							string strWnd = StrUtil.Utf8.GetString(MemUtil.Read(ms, cbWnd));
+							bool bWndExc = ((ms.ReadByte() & 1) != 0);
 							int cbSeq = MemUtil.BytesToInt32(MemUtil.Read(ms, 4));
 							string strSeq = StrUtil.Utf8.GetString(MemUtil.Read(ms, cbSeq));
 
-							m_atConfig.Add(new AutoTypeAssociation(strWnd, strSeq));
+							m_atConfig.Add(new AutoTypeAssociation(strWnd, bWndExc, strSeq));
 						}
 						else throw new FormatException();
 					}
