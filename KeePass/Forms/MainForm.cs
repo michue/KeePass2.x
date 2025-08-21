@@ -644,7 +644,7 @@ namespace KeePass.Forms
 			ImportUtil.Add(pe, PwDefs.PasswordField, KPRes.Password, pd);
 			ImportUtil.Add(pe, PwDefs.UrlField, PwDefs.HomepageUrl, pd);
 			ImportUtil.Add(pe, PwDefs.NotesField, KPRes.Notes, pd);
-			pe.AutoType.Add(new AutoTypeAssociation(KPRes.TargetWindow,
+			pe.AutoType.Add(new AutoTypeAssociation(KPRes.TargetWindow, false,
 				@"{USERNAME}{TAB}{PASSWORD}{TAB}{ENTER}"));
 			// for(int i = 0; i < 30; ++i) pe.CustomData.Set("Test" + i.ToString("D2"), "12345");
 			pd.RootGroup.AddEntry(pe, true);
@@ -654,7 +654,7 @@ namespace KeePass.Forms
 			ImportUtil.Add(pe, PwDefs.UserNameField, "Michael321", pd);
 			ImportUtil.Add(pe, PwDefs.PasswordField, "12345", pd);
 			ImportUtil.Add(pe, PwDefs.UrlField, PwDefs.HelpUrl + "kb/testform.html", pd);
-			pe.AutoType.Add(new AutoTypeAssociation("*Test Form - KeePass*", string.Empty));
+			pe.AutoType.Add(new AutoTypeAssociation("*Test Form - KeePass*", false, string.Empty));
 			pd.RootGroup.AddEntry(pe, true);
 
 #if DEBUG
