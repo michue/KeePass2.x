@@ -10,7 +10,7 @@
     <RootNamespace>KeePass</RootNamespace>
     <AssemblyName>KeePass</AssemblyName>
     <ApplicationIcon>KeePass.ico</ApplicationIcon>
-    <SignAssembly>true</SignAssembly>
+    <SignAssembly>false</SignAssembly>
     <AssemblyOriginatorKeyFile>KeePass.pfx</AssemblyOriginatorKeyFile>
     <FileUpgradeFlags>
     </FileUpgradeFlags>
